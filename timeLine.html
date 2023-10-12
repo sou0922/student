@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>タイムライン</title>
+    <link rel="stylesheet" href="timeLine.css">
+    <script type="text/javascript">
+        function pushDialog() {
+            Push.create("誰かが登校したよ",{
+                body: "玉木の成績が上昇しました!",
+                timeout: 8000,
+                onClick: function () {
+                    window.focus();
+                    this.close();
+                }
+            });
+        }
+
+        function createAttender() {
+            //出席者一覧エリア
+            let attenderArea = document.querySelector(".attenderArea");
+
+            //出席者のデータ
+            let attender_ele = document.createElement("div");
+            attender_ele.id = "attender";
+            attender_ele.classList.add("attender");
+
+            //名前div
+            let name_ele = document.createElement("div");
+            name_ele.classList.add("name");
+            name_ele.textContent = "【新キャラ】";
+
+            //情報div
+            let info_ele = document.createElement("div");
+            info_ele.classList.add("info");
+            info_ele.textContent = "情報を個々に書きます";
+
+            //すべてを結合していく
+            attender_ele.appendChild(name_ele);
+            attender_ele.appendChild(info_ele);
+            attenderArea.appendChild(attender_ele);
+        }
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.7/push.min.js"></script>
+</head>
+<body>
+    <div class="attenderArea">
+        <div id="attender" class="attender">
+            <div class="name">【新キャラ】</div>
+            <div class="info">生徒の情報をここに書きます</div>
+        </div>
+    </div>
+    <button onclick="createAttender()">確認</button>
+</body>
+</html>
