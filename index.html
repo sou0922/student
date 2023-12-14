@@ -2,54 +2,51 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>タイムライン</title>
-    <link rel="stylesheet" href="timeLine.css">
-    <script type="text/javascript">
-        function pushDialog() {
-            Push.create("誰かが登校したよ",{
-                body: "玉木の成績が上昇しました!",
-                timeout: 8000,
-                onClick: function () {
-                    window.focus();
-                    this.close();
-                }
-            });
-        }
-
-        function createAttender() {
-            //出席者一覧エリア
-            let attenderArea = document.querySelector(".attenderArea");
-
-            //出席者のデータ
-            let attender_ele = document.createElement("div");
-            attender_ele.id = "attender";
-            attender_ele.classList.add("attender");
-
-            //名前div
-            let name_ele = document.createElement("div");
-            name_ele.classList.add("name");
-            name_ele.textContent = "【新キャラ】";
-
-            //情報div
-            let info_ele = document.createElement("div");
-            info_ele.classList.add("info");
-            info_ele.textContent = "情報を個々に書きます";
-
-            //すべてを結合していく
-            attender_ele.appendChild(name_ele);
-            attender_ele.appendChild(info_ele);
-            attenderArea.appendChild(attender_ele);
-        }
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.7/push.min.js"></script>
+    <title>Attend</title>
+    <link rel="stylesheet" href="attend.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
+
 <body>
-    <div class="attenderArea">
-        <div id="attender" class="attender">
-            <div class="name">【新キャラ】</div>
-            <div class="info">生徒の情報をここに書きます</div>
+    <form>
+        <h1><span>4E</span>塾</h1>
+        <input placeholder="Username" id="Username" type="text"/>
+        <input placeholder="Password" id="Password" type="password"/>
+        <button class="btn" onclick="setAttend()">Attendance</button>
+        <!--<h6>Oh, social?</h6>
+        <div class="social">
+        <button class="tw btn">Twitter</button>
+        <button class="fb btn">Facebook</button>
+        <button class="google fb btn">Google+</button>-->
         </div>
-    </div>
-    <button onclick="createAttender()">確認</button>
+      </form>
+      
+      <!--<footer>
+        <h5>Right click and visit: <a target="_blank" href="http://lifes.gd">Life's Good</a></h5>
+      </footer>-->
+      <!--<script type="text/javascript" src="attend.js"></script>-->
+      <script>
+        $(document).ready(function(e){
+    $('h6').on('click',function(){
+       $('.social').stop().slideToggle();
+    });
+ })
+
+function setAttend() {
+    let name = document.getElementById("Username").value;
+    let password = document.getElementById("Password").value;
+    
+    const URL = "https://script.google.com/macros/s/AKfycbw6owA2Cf4ts1XeMNEM3hJNvj4gMFyjgk_RsXNl1WTP_e8TiZE3dljGzqcVPCu_mnkq/exec";
+    
+    let SendDATA = { "name" : name, "password" : password};
+    let postparam = {
+      "method" : "POST",
+      "mode" : "no-cors",
+      "Content-Type" : "application/x-www-form-urlencoded",
+      "body" : JSON.stringify(SendDATA)
+    };
+    fetch(URL, postparam);
+}
+      </script>
 </body>
 </html>
